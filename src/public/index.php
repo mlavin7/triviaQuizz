@@ -5,42 +5,66 @@
 
 <body>
   
-<section class="section sectionBanner" id="sectionQuizzTitle">
+<section class="section sectionBanner" id="bannerSection">
 <img  class="banner"  src="./assets/img/IndexBanner-jason-leung-Xaanw0s0pMk-unsplash.jpg" alt="banner, blue backgreund with conffeti falling ">
-<h1 class="triviaQuizzTitle" id="triviaQuizzTitle">Trivia quizz</h1>
+<h1 class="triviaQuizTitle" id="triviaQuizTitle">Trivia quiz</h1>
 <br>
-<p>Please Select the Category</p>
+<p class="paragraph" >Please Select the Category</p>
 <br>
 </section>
 <section class="section sectionInstructions" id="sectionInstruction">
-<form action="./Question.php">
-  <fieldset class=" indexFieldset">
-  <label class="labelFormIndex" for="categories">Categories</label>
-  </fieldset >
-  <fieldset class=" indexFieldset">
-  <select name="selectCategories" id="categories">
-    <option value="astronomy">astronomy</option>
-    <option value="music">music</option>
+
+<form method="POST" action="question.php" class="formIndex" name="formTopic"  >
+ 
+
+
+<fieldset class=" indexFieldset ">
+<label class="labelFormIndex" for="topic">Categories</label>
+<select name="selectCategories" id="topic" name="topic">
+    <option value="cinema">cinema</option>
+    <option value="tech">tech</option>
+    <option value="tierwelt">tierwelt</option>
+    <option value="animals">animals</option>
     <option value="ch-norris">ch-norris</option>
-    <option value="movies">movies</option>
-    <option value="etc..">etc..</option>
-    
+    <option value="tiere">tiere</option>
+    <option value="geography">geography</option>
+    <option value="astronomy">astronomy</option>
+    <option value="history">history</option>
+    <option value="werkzeuge">werkzeuge</option>
+<!-- 
+    cinema','tech','tierwelt','animals','ch-norris','tiere','geography','astronomy','history','werkzeuge'
+    -->
   </select>
+  <br>
+  <br>
+
 </fieldset>
+
+<fieldset class=" fieldsetContainerIndex">
+  <label for="questionNm" class="labelFormIndex"  >Number of questions</label>
+  <input type="number" name="questionNm"  id="questionNm" min="5" max="40" value="10" >
+
+</fieldset>
+
+  <!-- mit php gestelt -->
+  <input type="hidden" id="lastQuestionIndex" name="lastQuestionIndex" value="-1">
+  <!-- mit JS validate -->
+  <input type="hidden" id="indexStop" name="indexStop" value="1">
+  <!-- validation warning -->
+  <p id="validacionWarning" class="warning" ></p>
+
 <fieldset class="indexFieldsetButton">
-<input class="buttonNext" type="submit" value="Next">
+
+<input class="buttonNext" type="submit" value="Start">
+
 </fieldset>
 </form>
 
 </section>
-<section class="section sectionFormularCategories" id="sectionSelectCatergories">
 
 
-</section>
-<section class="section " id="sectionButtonIndex">
 
 
-</section>
     <!-- <?php
     // echo "<h1>Hello, we are starting to work with Databases and PHP PDO!</h1>";
     // // phpinfo();

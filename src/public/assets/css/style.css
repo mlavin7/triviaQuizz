@@ -25,41 +25,117 @@
 
 }
 
+#bannerSection{
+ height: 40vh;
+ width: 100vw;
+ display: flex;
+ flex-direction: column;
+ align-content: center;
+ justify-content: center;
+}
 .banner{
-  width: 100vw;
-  height: 30vh; 
+  width: 100%;
+  height: 20vh;
+  overflow:hidden; 
+  object-fit: cover;
 }
 
 h1{
-  margin-top: 5%; 
-  font-size: xx-large;
-  font-weight: bold;
   text-align: center;
+  margin-top: 5%; 
+  font-size: x-large;
+  font-weight: bold;
+
 }
 
+body{
+  
+  height: 80vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content:space-between;
+  align-content: center;
+  align-items: center;
+}
 p{
   font-size: large;
   font-weight: 500;
   text-align: center;
 }
 
+#questionForm{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  height: 60vh;
+  max-width: 960px; 
+}
+
+.paragraph{
+  font-size: medium;
+}
  /* index  page css */
 
   .indexFieldset{ 
     border: none;
     margin-top: 5%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     font-size: large;
  }
+ input[type="number" ] {
+  width: 8vh;
+  height:8vh;
+}
+
+.fieldsetQuestionNm{
+  width: 8vh;
+  height:8vh;
+  border: none; 
+  
+  
+}
+
+.fieldsetContainerIndex{
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  border: none;
+  max-width: 376px;
+  margin: 1vh;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.formIndex{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  height: 60vh;
+  max-width: 960px
+
+}
 
  .labelFormIndex{
   font-size: larger;
   font-weight: 500;
+  text-align: center;
+  text-justify: center;
  }
  /* form in index page  */
  select{
+    display: flex;
+    align-content: center;
+    justify-content: center;
     width: 300px;
     height: 64px; 
     font-size: larger;
@@ -81,7 +157,10 @@ p{
   align-items: center;
   border:none; 
   width: 100vw; 
-  margin-top: 15vh;
+  height: 10vh; 
+  margin-top:10vw; 
+  
+  
  
 
  }
@@ -98,3 +177,113 @@ p{
   font-size: x-large;
   font-weight: 500;
 }
+
+/* question.php css */
+
+/* questions css */
+
+
+
+#questionSection{
+  display: flex;
+  flex-wrap: wrap;  
+  justify-content: space-around;
+  align-content: space-around;
+  gap:5px; 
+  width: 90vw;  
+ 
+  
+  
+}
+.fieldsetContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border: none;.paragraph{
+    font-size: medium;
+  }
+  max-width: 376px;
+  margin: 1vh;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+  
+
+.fieldsetQuestion{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width: 70vw; 
+    max-width: 376px;
+    height: 8vh; 
+    text-align: center;
+    text-justify: center;
+    border-radius: 5px;
+    background-color: #F3D7CA;
+    -webkit-box-shadow: inset 10px 10px 53px -13px rgb(239, 163, 135);
+    -moz-box-shadow: inset 10px 10px 53px -13px rgb(239, 163, 135);
+    box-shadow: inset 10px 10px 53px -13px rgb(239, 163, 135);
+}
+
+.Qlabel{
+  background-color: transparent;
+
+}
+input[type=checkbox] {
+  width: 8vh;
+  height:8vh;
+  accent-color: lightgreen;
+
+}
+
+input[type=number] {
+ text-align: center;
+ text-justify: center;
+ font-size: xx-large;
+ font-weight: bold;
+ border: solid 1px darkgray;
+ background: rgba(255,255,255,1);
+background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 51%, rgba(246,246,246,1) 52%, rgba(209,202,209,1) 81%);
+background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(51%, rgba(246,246,246,1)), color-stop(52%, rgba(246,246,246,1)), color-stop(81%, rgba(209,202,209,1)));
+background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 51%, rgba(246,246,246,1) 52%, rgba(209,202,209,1) 81%);
+background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 51%, rgba(246,246,246,1) 52%, rgba(209,202,209,1) 81%);
+background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 51%, rgba(246,246,246,1) 52%, rgba(209,202,209,1) 81%);
+background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 51%, rgba(246,246,246,1) 52%, rgba(209,202,209,1) 81%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d1cad1', GradientType=0 );
+
+
+}
+
+@media screen and (min-width: 1025px) {
+ 
+  .fieldsetQuestion{
+    font-size: large;
+    font-weight: 800;
+  }
+  
+  h1{
+    font-size: 4rem;
+  }
+
+  .paragraph{
+    font-size: 2rem;
+  }
+
+
+}
+/* 
+@media screen and (max-width: 1025px) and (orientation: landscape){
+.banner{
+  height: 15vh;
+  
+}
+h1{
+  margin: 2%; 
+}
+
+.indexFieldsetButton {
+  margin-top: 1%;}
+
+} */
