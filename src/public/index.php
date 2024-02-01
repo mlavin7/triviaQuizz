@@ -19,8 +19,14 @@
 
 
 <fieldset class=" indexFieldset ">
-<label class="labelFormIndex" for="topic">Categories</label>
-<select name="selectCategories" id="topic" name="topic">
+
+
+<label for="topic" class="form-label labelFormIndex">Categories</label>
+<!-- <label class="labelFormIndex" for="topic">Categories</label> -->
+
+
+<!-- <select  class="form-select" aria-label="Default select example" id="topic" name="topic"> -->
+<select class="selectCategories form-select" id="topic" name="topic">
     <option value="cinema">cinema</option>
     <option value="tech">tech</option>
     <option value="tierwelt">tierwelt</option>

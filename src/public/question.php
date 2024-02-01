@@ -4,14 +4,65 @@
   ?>
 
 <body>
+<?php
+
+
+if(isset ($quiz["questionIdSequence"])){
+  $id = $quiz["questionIdSequence"][$currentQuestionIndex]; //taje acvtual question
+
+  $question =  fetchQuestionById($id, $dbConnection);
+
+
+
+  prettyPrint($question , "questions");
+
+
+};
+
+
+// if(isset($quiz["questionIdSequence"])) {
+//   $id = $quiz["questionIdSequence"][$currentQuestionIndex]; // take actual question id
+//   $question = fetchQuestionById($id, $dbConnection); // Assuming fetchQuestionById() is defined and takes a valid question ID and database connection
+//   prettyPrint($question, "questions"); // Assuming prettyPrint() is defined and formats the question output
+// }
+?>
+
+<input type="radio" name="single-choice" id="answer_1" value="0">
+<label for="answer_1"></label>
+
 <section class="section" id="bannerSection">
 <img  class="banner"  src="./assets/img/IndexBanner-jason-leung-Xaanw0s0pMk-unsplash.jpg" alt="banner, blue backgreund with conffeti falling ">
-<h1 class="triviaQuizzQuestion" id="triviaQuizzQuestion">What is Chuck Norris''s favorite color?</h1>
+
+ <h2> question<?php echo ($currentQuestionIndex + 1); ?> von <?php echo $quiz["questionNm"]; ?></h2> 
+ <h1 class="triviaQuizzQuestion" id="triviaQuizzQuestion"></h1>
 <br>
 
 </section>
 <section class="section" id="questionSection">
-<form action="" id="questionForm" name="questionForm" >
+<form action="<?php echo $actionUrl; ?>" id="questionForm formQuestion" name="questionForm" >
+
+<?php 
+print_r($question);
+$correct = $question['correct'];
+
+for ($i = 1; $i <= 5; $i++){
+  $answerColumnName = "answer_".$i;
+
+  if(isset($question[$answerColumnName] )&& $question[$answerColumnName]){
+
+    $answerText = $question[$answerColumnName];
+
+
+  if ($correct == $answerColumnName)
+    $value = 1;else   $value = 0; 
+
+  
+ 
+ echo "<input type='radio' name='single-choice' id='$answerColumnName' value='$value'>
+        <label for='$answerColumnName'> $answerText</label>"; 
+}}
+
+?>
     
 
     <fieldset class="fieldsetContainer">

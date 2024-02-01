@@ -236,7 +236,7 @@ try {
 
  function fetchQuestionIdSequence($topic, $questionNm, $dbConnection){
    //select id 
-   $query = "SELECT `id` FROM `questions` WHERE `topic` = '$topic' ORDER BY RAND() LIMIT $questionNm; "; //WHEN WE MADSE TE DOUBLE QUOTES AOUTSIDE php WIL TAKE TEH SPLACEHOLDERS AUTOMATIVCALLY
+   $query = "SELECT `id` FROM `questions` WHERE `topic` ='$topic' ORDER BY RAND() LIMIT $questionNm; "; //WHEN WE MADSE TE DOUBLE QUOTES AOUTSIDE php WIL TAKE TEH SPLACEHOLDERS AUTOMATIVCALLY
    $sqlStatement = $dbConnection->query($query);
    $rows = $sqlStatement->fetchAll(PDO::FETCH_COLUMN, 0); //---- fetch all by column , start with the index 0 (index of the first column)
    
@@ -244,4 +244,12 @@ try {
    return $rows; 
  }
  
+function fetchQuestionById($id, $dbConnection){
 
+   $sqlStatement = $dbConnection->query("SELECT * FROM `questions` WHERE `id` = $id");
+   $row = $sqlStatement->fetch(PDO::FETCH_ASSOC);
+
+   print_r($row);
+
+   return $row;
+}
