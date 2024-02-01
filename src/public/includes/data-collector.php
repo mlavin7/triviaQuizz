@@ -20,12 +20,14 @@ if(isset($_SESSION["quiz"])) $quiz = $ $_SESSION["quiz"];
 // we read from the index.php the field with the name= lasQuestion Index
 
 if(isset($_POST["lastQuestionIndex"])){
-    $lastQuestionIndex = intval($_POST ["lastQuestionIndex"]);
+    $lastQuestionIndex = intval($_POST["lastQuestionIndex"]);
 }
 else{ 
     // -1  means the the quiz should not start
     $lastQuestionIndex = -1 ; 
 }
+
+
 
 
 
@@ -40,8 +42,17 @@ if($quiz === NULL) {
         $dbConnection); 
 }
 
+$quiz =array (
+
+"topic" => $_post["topic"],
+"questionNm" => $questionNm,
+"lastQuestionIndex" => $lastQuestionIndex,
+"currentQuestionIndex" => -1,
+"questionIdSecuence" => $questionIdSecuence,
 
 
+); 
+$_SESSION['quiz'] = $quiz;
 
 prettyPrint($quiz, "\$quiz is"); 
 prettyPrint($questionIdSequence , "\$questionIdSequence is "); 
