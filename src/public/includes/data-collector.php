@@ -1,104 +1,88 @@
 <?php 
-
-include 'tools.php'; // preetyOrint() load 
-include 'db.php'; //connection to data bank $bConnection work
-
-if (session_status() === PHP_SESSION_NONE) {
 session_start();
- }
- 
-// Abhängig von der aktuellen Hauptseite: Bereite die benötigten Seitendaten vor. 
-$scriptName = $_SERVER['SCRIPT_NAME'];   
-//index.php (Startseite)-------------------------------------------------------------------- 
-if (str_contains($scriptName, 'index')) {     
-    // Lösche die Daten aus der Session, inkl. bestehende Daten aus dem Quiz     
-    session_unset();      $quiz = null; }  
-// question.php (Frageseite)---------------------------------------------------------------- 
 
-if(isset($_SESSION['quiz'])) $quiz = $_SESSION['quiz']; $quiz = null; 
+// Hilfswerkzeuge laden
+include 'tools.php'; // prettyPrint() laden
+include 'db.php';    // Datenbank-Verbindung $dbConnection aufbauen
 
+// Falls verfügbar, hole die Quiz-Daten aus der Session.
+if (isset($_SESSION["quiz"])) $quiz = $_SESSION["quiz"];
+else $quiz = null;
 
-
-//if avaliable take the quizz-data of the secion
-
-
-// we read from the index.php the field with the name= lasQuestion Index
-
-if(isset($_POST["lastQuestionIndex"])){
+/*
+    Hole die Indexnummer der letzten Frage aus $_POST "lastQuestionIndex".
+    $lastQuestionIndex wird für question.php und report.php verwendet, jedoch
+    nicht für index.php.
+*/
+if (isset($_POST["lastQuestionIndex"])) {
+    // https://www.php.net/manual/en/function.intval.php
     $lastQuestionIndex = intval($_POST["lastQuestionIndex"]);
+
+    if ($lastQuestionIndex >= 0) {
+        $questionName = "question-" . $lastQuestionIndex;
+        $_SESSION[$questionName] = $_POST;
+    }
 }
-else{ 
-    // -1  means the the quiz should not start
-    $lastQuestionIndex = -1 ; 
+else {
+    // -1 soll bedeuten, dass das Quiz noch nicht gestartet wurde.
+    $lastQuestionIndex = -1;
 }
 
 // Abhängig von der aktuellen Hauptseite: Bereite die benötigten Seitendaten vor.
-$scriptName = $_SERVER['SCRIPT_NAME'];   //index.php (Startseite)-------------------------------------------------------------------- 
-if (str_contains($scriptName, 'index')) {     // Lösche die Daten aus der Session, inkl. bestehende Daten aus dem Quiz     
-    session_unset();      
-    $quiz = null; }
-//index php (start page)
+$scriptName = $_SERVER['SCRIPT_NAME']; // https://www.php.net/manual/en/reserved.variables.server.php
 
-//quetion.php page
-else if(str_contains($scriptName, 'question')){
+// index.php (Startseite) ----------------------------------------------------------------
+if (str_contains($scriptName, 'index')) {
+    // Lösche die Daten, inklusive bestehende Quiz-Daten in der $_SESSION.
+    session_unset();
 
-    if($quiz === NULL) {
-        // we pick the secuense of the qid question  from the data bank
-           $questionNm = intval($_POST["questionNm"]);   
-       
-          
-           $questionIdSequence = fetchQuestionIdSequence(
-               $_POST["topic"], 
-               $questionNm, 
-               $dbConnection); 
-          $questionNm = count($questionIdSequence); 
-
-       $quiz =array (
-       
-       "topic" => $_POST["topic"],
-       "questionNm" => $questionNm,
-       "lastQuestionIndex" => $lastQuestionIndex,
-       "currentQuestionIndex" => -1,
-       "questionIdSequence" => $questionIdSequence,
-       
-       
-       ); 
-    
-
-       $_SESSION['quiz'] = $quiz;
-       
-       
-       }
-
-    $currentQuestionIndex = $lastQuestionIndex + 1; 
-
-    if ($currentQuestionIndex >= $quiz["questionNm"] -1){
-        //jumping to the report page (resport.php)
-        $actionUrl= "report.php"; 
-    }
-    else{
-
-        $actionUrl = "question.php"; 
-
-    }
- 
-        prettyPrint($quiz, "\$quiz is"); 
-prettyPrint($questionIdSequence , "\$questionIdSequence is "); 
-echo "<p>\$lastQuestionIndex is $lastQuestionIndex</p>";
-echo "<p>\$questionNm is $questionNm</p>";
-echo "<p>\$actionUrl is $actionUrl</p>"; 
-
-
+    // Setze explizit auch $quiz zurück (Konsistenz gegenüber Session).
+    $quiz = null;
 }
+// question.php (Frageseite) -------------------------------------------------------------
+else if (str_contains($scriptName, 'question')) {
+    // Quiz-Daten vorbereiten
+    if ($quiz === null) { // Falls noch keine $quiz Daten verfügbar sind ...
+        // Hole die Anzahl Fragen aus dem $_POST.
+        $questionNum = intval($_POST["questionNum"]);
 
-// report.php
-else if(str_contains($scriptName, 'report')){
+        // Hole die Sequenz der Frage 'id'-s aus der Datenbank.
+        $questionIdSequence = fetchQuestionIdSequence(
+            $_POST["topic"], 
+            $questionNum, 
+            $dbConnection
+        );
 
+        // Berechne die wirklich mögliche Anzahl von Fragen.
+        $questionNum = count($questionIdSequence);
+
+        // Sammle Quiz-Daten in $quiz und speicher $quiz in der Session.
+        $quiz = array(
+            "topic" => $_POST["topic"], 
+            "questionNum" => $questionNum,
+            "lastQuestionIndex" => $lastQuestionIndex,
+            "currentQuestionIndex" => -1,
+            "questionIdSequence" => $questionIdSequence
+        );
+
+        $_SESSION["quiz"] = $quiz;
+
+        // DEVONLY
+        // prettyPrint($_SESSION["quiz"], "\$quiz is");
+    }
+
+    // Index der aktuellen Frage, sowie für das Quiz setzen.
+    $currentQuestionIndex = $lastQuestionIndex + 1;
+
+    if ($currentQuestionIndex >= $quiz["questionNum"] - 1) {
+        // Auf die report.php-Seite springen.
+        $actionUrl = "report.php";
+    }
+    else {
+        // Die nächste Frage darstellen.
+        $actionUrl = "question.php";
+    }
 }
-
-
-
-
-
-
-
+// report.php (Auswertungsseite) -------------------------------------------------------------
+else if (str_contains($scriptName, 'report')) {
+}

@@ -1,8 +1,5 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
 
-session_start();
-}; 
 
 $db_host = getenv("DB_HOST");
 $db_name = getenv("DB_NAME");
@@ -48,7 +45,7 @@ try{
     }
 
     // bereite die Abfrage vor
-    $query = $dbConn->prepare($queryString);
+    $query = $dbConnection->prepare($queryString);
 
     // füge Daten für Platzhalter ein, falls vorhanden
     $query->execute($data);

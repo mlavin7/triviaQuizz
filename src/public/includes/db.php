@@ -1,10 +1,4 @@
 <?php
-//connect to SQL, with help of a PDO object
-
-if (session_status() === PHP_SESSION_NONE) {
-
-   session_start();
-}
 
 $db_host = getenv("DB_HOST");
 $db_name = getenv("DB_NAME");
@@ -234,9 +228,9 @@ try {
 
 //  QUERRY FUNCTIONS-------------------------------------------------
 
- function fetchQuestionIdSequence($topic, $questionNm, $dbConnection){
+ function fetchQuestionIdSequence($topic, $questionNum, $dbConnection){
    //select id 
-   $query = "SELECT `id` FROM `questions` WHERE `topic` ='$topic' ORDER BY RAND() LIMIT $questionNm; "; //WHEN WE MADSE TE DOUBLE QUOTES AOUTSIDE php WIL TAKE TEH SPLACEHOLDERS AUTOMATIVCALLY
+   $query = "SELECT `id` FROM `questions` WHERE `topic` ='$topic' ORDER BY RAND() LIMIT $questionNum; "; //WHEN WE MADSE TE DOUBLE QUOTES AOUTSIDE php WIL TAKE TEH SPLACEHOLDERS AUTOMATIVCALLY
    $sqlStatement = $dbConnection->query($query);
    $rows = $sqlStatement->fetchAll(PDO::FETCH_COLUMN, 0); //---- fetch all by column , start with the index 0 (index of the first column)
    

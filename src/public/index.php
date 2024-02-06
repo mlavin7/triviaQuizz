@@ -1,5 +1,6 @@
 
  <?php
+  include "./includes/data-collector.php"; 
   include './Components/head.php'
   ?>
 
@@ -47,8 +48,8 @@
 </fieldset>
 
 <fieldset class=" fieldsetContainerIndex">
-  <label for="questionNm" class="labelFormIndex"  >Number of questions</label>
-  <input type="number" name="questionNm"  id="questionNm" min="5" max="40" value="10" >
+  <label for="questionuNm" class="labelFormIndex"  >Number of questions</label>
+  <input type="number" name="questionNum"  id="questionNum" min="5" max="40" value="10" >
 
 </fieldset>
 
@@ -71,12 +72,7 @@
 
 
 
-    <!-- <?php
-    // echo "<h1>Hello, we are starting to work with Databases and PHP PDO!</h1>";
-    // // phpinfo();
-    // // echo get_include_path();
-    // include dirname(__DIR__) . '/utils/db.php';
-    ?> -->
+
 </body>
 
 </html>

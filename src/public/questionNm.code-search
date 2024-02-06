@@ -1,0 +1,56 @@
+# Query: questionNm
+# Flags: CaseSensitive WordMatch
+# ContextLines: 1
+
+19 results - 4 files
+
+src/public/index.php:
+  50  <fieldset class=" fieldsetContainerIndex">
+  51:   <label for="questionNm" class="labelFormIndex"  >Number of questions</label>
+  52:   <input type="number" name="questionNm"  id="questionNm" min="5" max="40" value="10" >
+  53  
+
+src/public/question.php:
+   37  
+   38:  <h2> question <?php echo ($currentQuestionIndex + 1); ?> von <?php echo $quiz["questionNm"]; ?>></h2> 
+   39   <h1 class="triviaQuizzQuestion" id="triviaQuizzQuestion"></h1>
+
+  102  
+  103: <input type="hidden" id="questionNm"  name="questionNm"  value="<?php echo $questionNm; ?>">
+  104  <input type="hidden" id="lastQuestionIndex" name="lastQuestionIndex"   value=" <?php echo $currentQuestionIndex;?> ">
+
+  107  <?php    
+  108: print_r($questionNm) ; ?>
+  109      <!-- <fieldset class="fieldsetContainer">
+
+  146  prettyPrint($_SESSION ,"\$_SESSION");
+  147: prettyPrint($questionNm , "\$questionNm"); 
+  148  ?>
+
+src/public/includes/data-collector.php:
+  50  
+  51:         $questionNm = intval($_POST["questionNm"]);
+  52  
+
+  55              $_POST["topic"], 
+  56:             $questionNm, 
+  57              $dbConnection
+
+  60          // calculate the real number of questions
+  61:         $questionNm = count($questionIdSequence);
+  62  
+
+  68              "topic" =>$_POST["topic"],
+  69:             "questionNm" => $questionNm,
+  70              "lastQuestionIndex" => $lastQuestionIndex,
+
+  81  
+  82:     if($currentQuestionIndex >= $quiz["$questionNm"] - 1){
+  83          // Auf die result.php Seite springen
+
+src/public/includes/db.php:
+  233  
+  234:  function fetchQuestionIdSequence($topic, $questionNm, $dbConnection){
+  235     //select id 
+  236:    $query = "SELECT `id` FROM `questions` WHERE `topic` ='$topic' ORDER BY RAND() LIMIT $questionNm; "; //WHEN WE MADSE TE DOUBLE QUOTES AOUTSIDE php WIL TAKE TEH SPLACEHOLDERS AUTOMATIVCALLY
+  237     $sqlStatement = $dbConnection->query($query);
