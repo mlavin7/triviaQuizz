@@ -24,6 +24,17 @@
   background-color: var(--color-one);
 
 }
+body{
+  
+  height: 80vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content:space-between;
+  align-content: center;
+  align-items: center;
+  justify-items: center;
+}
 
 #bannerSection{
  height: 40vh;
@@ -45,22 +56,12 @@ h1{
   width: 100vw;
   text-align: center;
   margin-top: 5%; 
-  font-size: x-large;
+  font-size: xx-large;
   font-weight: bold;
 
 }
 
-body{
-  
-  height: 80vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  justify-content:space-between;
-  align-content: center;
-  align-items: center;
-  justify-items: center;
-}
+
 p{
   width: 100vw;
   font-size: large;
@@ -88,6 +89,7 @@ formIndex{
 }
 .paragraph{
   font-size: medium;
+  padding-inline: 1vw;
 }
  /* index  page css */
 
@@ -154,7 +156,7 @@ formIndex{
     display: flex;
     align-content: center;
     justify-content: center;
-    width: 300px;
+    width: 250px;
     height: 64px; 
     font-size: larger;
     font-weight: 500;
@@ -177,7 +179,7 @@ formIndex{
   border:none; 
   width: 100vw; 
   height: 10vh; 
-  margin-top:10vh; 
+  margin-top:1vh; 
  }
 
 
@@ -231,8 +233,8 @@ formIndex{
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    width: 70vw; 
-    max-width: 376px;
+    width: 80vw; 
+    max-width: 390px;
     height: 8vh; 
     text-align: center;
     text-justify: center;
@@ -245,6 +247,7 @@ formIndex{
 
 .Qlabel{
   background-color: transparent;
+  font-size: 0.9rem;
 
 }
 input[type=checkbox] {
@@ -271,3 +274,17 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 
 
 }
+
+/* // radio button  start */
+
+input[type="radio"] {
+  width: 8vh;
+  height:8vh;
+
+}
+
+input[type="radio" i]{
+  margin:5px;
+  accent-color: lightgreen; 
+}
+    

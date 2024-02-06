@@ -35,22 +35,31 @@ foreach($_SESSION as $questionKey => $data) {
 
 $percent = $totalPoints / $maxTotalPoints;
 
-if( $percent > 0.4) {
+if( $percent < 0.4) {
   $feedback = "Upps try again";}
-else if( $percent > 0.6) { 
-  $feedback =" not bad";
+else if( $percent < 0.6) { 
+  $feedback ="not bad";
 }
 else{
-  $feedback = " well done!";
+  $feedback = "well done!";
 }
-
-
-
-prettyPrint($_SESSION ,  "\$_SESSION ");
+;
 
 ?>
-<h3> You achieved <?php echo $totalPoints ;  ?> out of <?php echo $maxTotalPoints ?> points </h3>
-<h3> <?php echo $feedback ?> </h3>
+
+
+  
+<section class="section sectionBanner" id="bannerSection">
+<img  class="banner"  src="./assets/img/IndexBanner-jason-leung-Xaanw0s0pMk-unsplash.jpg" alt="banner, blue backgreund with conffeti falling ">
+<h1 class="triviaQuizTitle" id="triviaQuizTitle"><?php echo $quiz["topic"] ?></h1>
+<br>
+<p style="font-size: x-large;" class="paragraph" >your results</p>
+<br>
+</section>
+<section class="section sectionInstructions" id="sectionInstruction">
+
+<h2 style="width: 100vw; padding:1vw; text-alighn: center;" > You achieved <?php echo $totalPoints ;  ?> out of <?php echo $maxTotalPoints ?> points </h1>
+<h2> <?php echo $feedback ?> </p>
 
 
 
@@ -58,16 +67,13 @@ prettyPrint($_SESSION ,  "\$_SESSION ");
 
 
 
+<div class="indexFieldsetButton">
 
-
-<a href=".index.php">
-<button onClick =" <?php session_destroy(); $quiz = NULL; ?>">Back</button>
+<a href="index.php">
+<button class="buttonNext" onClick =" <?php session_destroy(); $quiz = NULL; ?>">Back</button>
 </a>
 
-
-    <section class="section" id="sectionBannerReport"></section>
-    <section class="section" id="SectionReport"></section>
-    <section class="section" id="SectionBackButton"></section>
-    
+</div>
+</section>
 </body>
 </html>

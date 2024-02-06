@@ -13,24 +13,19 @@
 <body>
 <section class="section sectionBanner" id="bannerSection">
 <img  class="banner"  src="./assets/img/IndexBanner-jason-leung-Xaanw0s0pMk-unsplash.jpg" alt="banner, blue backgreund with conffeti falling ">
-<h1 class="triviaQuizTitle" id="triviaQuizTitle"><?php echo ($topic["topic"]) ?></h1>
+<h1 style="text-align: center; font-weight: 700; font-size: xx-large; ; " class="triviaQuizTitle" id="triviaQuizTitle"><?php echo ($quiz["topic"]) ?></h1>
 <br>
 <p class="paragraph" >Question <?php echo ($currentQuestionIndex + 1); ?> from <?php echo $quiz["questionNum"]; ?></p>
-<br>
 <br>
 <p class="paragraph" ><?php echo $question["question_text"]; ?></p>
 <br>
 </section>
-
+<section class="section sectionInstructions" id="sectionInstruction">
 
 <!-- FORMULAR "Fragestellung" -->
-<div class="row" style="padding: 20px;">
- <div class="col-sm-8">
-     <!-- Fragestellung -->
-     <h7>Frage <?php echo ($currentQuestionIndex + 1); ?> von <?php echo $quiz["questionNum"]; ?></h7>
-     <h3><</h3>
-     <p>&nbsp;</p>
 
+
+     
      <form id="quiz-form" action="<?php echo $actionUrl; ?>" method="post" onsubmit="return navigate('next');">
          <?php 
              // Generiere die Antworten, entweder Radio- oder Checkbox-Buttons.
@@ -72,19 +67,28 @@
                      else $value = 0;
 
   
+       $required=''  ;            
 //  prinquestionNum it "$question";
+        if( $answerColumnName == 'answer_1')
+        { $required= 'required'; }
+
+        
+
                 echo "<fieldset class='fieldsetContainer'>" ; // check my css
 
  if($multipleChoice){
   
-         echo "<input type='checkbox'  class='fieldsetQuestionCB' name='multipleChoices' id='$answerColumnName' value ='$value'>
+         echo "<input type='checkbox'  class='fieldsetQuestionCB' name='multipleChoice' id='$answerColumnName' value ='$value'>
          <label   class='Qlabel fieldsetQuestion' for='$answerColumnName'> $answerText</label>
      " ; 
  } else {
 
 
-        echo "<input type='radio' class='fieldsetQuestionCB' id='$answerColumnName' name ='singleChoice' value='$value'>
-         <label class='Qlabel fieldsetQuestion' for='$answerColumnName'>$answerText</label>";
+        echo "
+        <input type='radio' class='fieldsetQuestionCB ' id='$answerColumnName' name ='singleChoice' value='$value' $required > 
+         <label class='Qlabel fieldsetQuestion dentedfield' for='$answerColumnName'>$answerText</label>";
+
+         
        
 }}; 
     
@@ -100,38 +104,7 @@ echo "</fieldset>";
 <input type="hidden" id="multipleChoice" name= "multipleChoice" value="<?php echo $multipleChoice ? 'true': 'false'; ?>" >
 <input type="hidden" id= "maxPoints" name="maxPoints" value=" <?php echo $maxPoints  ?>">
 <input type="hidden" id="indexStep" name="indexStep" value="1"  >
-
-    <!-- <fieldset class="fieldsetContainer">
-      <input type="checkbox"  class="fieldsetQuestionCB" name="question-1" id="question-1">
-      <label class="Qlabel fieldsetQuestion" for="question-2">'Red'</label>   
-    </fieldset>
-   
-    <fieldset class="fieldsetContainer">
-    <input type="checkbox"  class="fieldsetQuestionCB" name="question-2" id="question-2">
-    <label class="Qlabel fieldsetQuestion" for="question-2">'Red'</label>    
-    </fieldset>
-    
-
-    <fieldset class="fieldsetContainer">
-    <input type="checkbox" class="fieldsetQuestionCB" name="question-3" id="question-3">
-    <label class="Qlabel fieldsetQuestion" for="question-3">'Black'</label>    
-    </fieldset>
-
-    <fieldset class="fieldsetContainer">
-    <input type="checkbox" class=" fieldsetQuestionCB"name="question-4" id="question-4">
-    <label class=" Qlabel fieldsetQuestion" for="question-4">'Chuck Norris''s favorite color is all colors'</label>    
-    </fieldset>
-    
-
-    <fieldset class="fieldsetContainer">
-    <input type="checkbox" class="fieldsetQuestionCB" name="question-5" id="question-5">
-    <label class="Qlabel fieldsetQuestion" for="question-5">'Chuck Norris''s favorite color is the color of fear</label>    
-    </fieldset> -->
-
-
-
-  
-    <fieldset class="indexFieldsetButton">
+<fieldset class="indexFieldsetButton">
 <input class="buttonNext" type="submit" value="Next">
 </fieldset>
 </form>
