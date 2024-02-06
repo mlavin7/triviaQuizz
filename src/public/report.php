@@ -13,20 +13,20 @@
 
 foreach($_SESSION as $questionKey => $data) {
   
-  if (str_contains($questionKey,'question-')) { // "question-0" etc.
-    if ($data['multipleChoice'] === 'true') {
-      foreach ($data as $key => $value) {
-        $points = intval($value );
-        $totalPoints = $totalPoints + $points;
-        echo " multiple choice true read till here";
-
-        
-      }
+ 
+    if (str_contains($questionKey, 'question-')) {
+        if ($data["multipleChoice"] === 'true'){
+            foreach ($data as $key => $value) {
+                if (str_contains($key, 'multipleChoices')) {
+                  $points = intval($value);
+                  $totalPoints = $totalPoints + $points; // Kurzform: $totalPoints += $points;
+              }}
+      
     }
     else if ($data['multipleChoice'] === 'false') {
         $points = intval($data['singleChoice']);
         $totalPoints = $totalPoints + $points;
-        echo " multiple choice false read till here";
+      
     }
 
     $maxTotalPoints = $maxTotalPoints + intval($data["maxPoints"]); 
@@ -60,9 +60,9 @@ prettyPrint($_SESSION ,  "\$_SESSION ");
 
 
 
-
-
-
+<a href=".index.php">
+<button onClick =" <?php session_destroy(); $quiz = NULL; ?>">Back</button>
+</a>
 
 
     <section class="section" id="sectionBannerReport"></section>

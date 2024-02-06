@@ -5,32 +5,30 @@
 // Hole die $id der aktuellen Frage aus $quiz
  if(isset ($quiz["questionIdSequence"])){
   $id = $quiz["questionIdSequence"][$currentQuestionIndex]; //taje acvtual question
-
   $question =  fetchQuestionById($id, $dbConnection);
-
-
-
-  prettyPrint($question , "questions");
-
 
 };
 ?>
 
-<!-- DEVONLY -->
-<div class="container">
- <div class="row">
-     <div class="col-4"><?php prettyPrint($_SESSION["quiz"], "\$quiz is");?></div>
-     <div class="col-6"><?php prettyPrint($question, "\$question is");?></div>
- </div>
-</div>
-<!-- END:DEVONLY -->
+<body>
+<section class="section sectionBanner" id="bannerSection">
+<img  class="banner"  src="./assets/img/IndexBanner-jason-leung-Xaanw0s0pMk-unsplash.jpg" alt="banner, blue backgreund with conffeti falling ">
+<h1 class="triviaQuizTitle" id="triviaQuizTitle"><?php echo ($topic["topic"]) ?></h1>
+<br>
+<p class="paragraph" >Question <?php echo ($currentQuestionIndex + 1); ?> from <?php echo $quiz["questionNum"]; ?></p>
+<br>
+<br>
+<p class="paragraph" ><?php echo $question["question_text"]; ?></p>
+<br>
+</section>
+
 
 <!-- FORMULAR "Fragestellung" -->
 <div class="row" style="padding: 20px;">
  <div class="col-sm-8">
      <!-- Fragestellung -->
      <h7>Frage <?php echo ($currentQuestionIndex + 1); ?> von <?php echo $quiz["questionNum"]; ?></h7>
-     <h3><?php echo $question["question_text"]; ?></h3>
+     <h3><</h3>
      <p>&nbsp;</p>
 
      <form id="quiz-form" action="<?php echo $actionUrl; ?>" method="post" onsubmit="return navigate('next');">
@@ -75,18 +73,18 @@
 
   
 //  prinquestionNum it "$question";
- echo "<fieldset class='fieldsetContainer'>" ; // check my css
+                echo "<fieldset class='fieldsetContainer'>" ; // check my css
 
  if($multipleChoice){
   
-  echo "<input type='checkbox'  class='fieldsetQuestionCB' name='MultipleChioce' id='$answerColumnName' value ='$value'>;
-    <label for='$answerColumnName'> $answerText</label>
-     " ;
+         echo "<input type='checkbox'  class='fieldsetQuestionCB' name='multipleChoices' id='$answerColumnName' value ='$value'>
+         <label   class='Qlabel fieldsetQuestion' for='$answerColumnName'> $answerText</label>
+     " ; 
  } else {
 
 
- echo "<input type='radio' class='fieldsetQuestionCB' id='$answerColumnName' name ='singleChoice' value='$value'>";
- echo "<label class='Qlabel fieldsetQuestion' for='$answerColumnName'>$answerText</label>";
+        echo "<input type='radio' class='fieldsetQuestionCB' id='$answerColumnName' name ='singleChoice' value='$value'>
+         <label class='Qlabel fieldsetQuestion' for='$answerColumnName'>$answerText</label>";
        
 }}; 
     
@@ -102,8 +100,7 @@ echo "</fieldset>";
 <input type="hidden" id="multipleChoice" name= "multipleChoice" value="<?php echo $multipleChoice ? 'true': 'false'; ?>" >
 <input type="hidden" id= "maxPoints" name="maxPoints" value=" <?php echo $maxPoints  ?>">
 <input type="hidden" id="indexStep" name="indexStep" value="1"  >
-<?php    
-print_r($questionNum) ; ?>
+
     <!-- <fieldset class="fieldsetContainer">
       <input type="checkbox"  class="fieldsetQuestionCB" name="question-1" id="question-1">
       <label class="Qlabel fieldsetQuestion" for="question-2">'Red'</label>   
@@ -140,9 +137,7 @@ print_r($questionNum) ; ?>
 </form>
 
 </section>
-<?php
-prettyPrint($_SESSION ,"\$_SESSION");
-?>
+
 </body>
 </html>
 

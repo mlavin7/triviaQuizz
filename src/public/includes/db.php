@@ -243,7 +243,7 @@ function fetchQuestionById($id, $dbConnection){
    $sqlStatement = $dbConnection->query("SELECT * FROM `questions` WHERE `id` = $id");
    $row = $sqlStatement->fetch(PDO::FETCH_ASSOC);
 
-   print_r($row);
+
 
    return $row;
 }
